@@ -13,6 +13,7 @@ import com.github.dhaval2404.imagepicker.provider.CompressionProvider
 import com.github.dhaval2404.imagepicker.provider.CropProvider
 import com.github.dhaval2404.imagepicker.provider.GalleryProvider
 import com.github.dhaval2404.imagepicker.util.FileUriUtils
+import java.io.File
 
 /**
  * Pick Image
@@ -80,6 +81,11 @@ class ImagePickerActivity : AppCompatActivity() {
                 mCameraProvider?.onRestoreInstanceState(savedInstanceState)
                 // Pick Camera Image
                 savedInstanceState ?: mCameraProvider?.startIntent()
+            }
+            ImageProvider.FILE -> {
+                (intent?.getSerializableExtra(ImagePicker.EXTRA_FILE) as File?)?.let {
+                    setImage(Uri.fromFile(it))
+                }
             }
             else -> {
                 // Something went Wrong! This case should never happen

@@ -82,7 +82,7 @@ class ImagePickerActivity : AppCompatActivity() {
                 savedInstanceState ?: mCameraProvider?.startIntent()
             }
             ImageProvider.URI -> {
-                (intent?.getSerializableExtra(ImagePicker.EXTRA_URI) as Uri?)?.let {
+                (intent?.getParcelableExtra(ImagePicker.EXTRA_URI) as Uri?)?.let {
                     setImage(it)
                 }
             }

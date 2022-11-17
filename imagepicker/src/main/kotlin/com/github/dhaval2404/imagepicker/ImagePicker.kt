@@ -2,6 +2,7 @@ package com.github.dhaval2404.imagepicker
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.github.dhaval2404.imagepicker.constant.ImageProvider
@@ -38,7 +39,7 @@ open class ImagePicker {
         internal const val EXTRA_ERROR = "extra.error"
         internal const val EXTRA_FILE_PATH = "extra.file_path"
         internal const val EXTRA_MIME_TYPES = "extra.mime_types"
-        internal const val EXTRA_FILE = "extra.file"
+        internal const val EXTRA_URI = "extra.uri"
 
         /**
          * Use this to use ImagePicker in Activity Class
@@ -102,6 +103,8 @@ open class ImagePicker {
          */
         private var maxSize: Long = 0
 
+        private var uri: Uri? = null
+
         private var imageProviderInterceptor: ((ImageProvider) -> Unit)? = null
 
         /**
@@ -151,8 +154,8 @@ open class ImagePicker {
             return this
         }
 
-        fun fileOnly() : Builder {
-            this.imageProvider = ImageProvider.FILE
+        fun setUri(uri: Uri): Builder {
+            this.uri = uri
             return this
         }
 
@@ -355,6 +358,8 @@ open class ImagePicker {
                 putLong(EXTRA_IMAGE_MAX_SIZE, maxSize)
 
                 putString(EXTRA_SAVE_DIRECTORY, saveDir)
+
+                putParcelable(EXTRA_URI, uri)
             }
         }
 

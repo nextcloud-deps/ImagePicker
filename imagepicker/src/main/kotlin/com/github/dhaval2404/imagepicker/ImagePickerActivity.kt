@@ -81,8 +81,8 @@ class ImagePickerActivity : AppCompatActivity() {
                 // Pick Camera Image
                 savedInstanceState ?: mCameraProvider?.startIntent()
             }
-            ImageProvider.FILE -> {
-                (intent?.getSerializableExtra(ImagePicker.EXTRA_FILE) as File?)?.let{
+            ImageProvider.URI -> {
+                (intent?.getSerializableExtra(ImagePicker.EXTRA_URI) as Uri?)?.let {
                     setImage(it)
                 }
             }

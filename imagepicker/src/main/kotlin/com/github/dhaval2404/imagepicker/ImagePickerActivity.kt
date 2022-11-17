@@ -81,6 +81,11 @@ class ImagePickerActivity : AppCompatActivity() {
                 // Pick Camera Image
                 savedInstanceState ?: mCameraProvider?.startIntent()
             }
+            ImageProvider.URI -> {
+                (intent?.getSerializableExtra(ImagePicker.EXTRA_URI) as Uri?)?.let {
+                    setImage(it)
+                }
+            }
             else -> {
                 // Something went Wrong! This case should never happen
                 Log.e(TAG, "Image provider can not be null")
